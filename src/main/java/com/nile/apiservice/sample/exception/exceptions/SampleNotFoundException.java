@@ -1,4 +1,4 @@
-package com.nile.apiservice.sample.exception;
+package com.nile.apiservice.sample.exception.exceptions;
 
 public class SampleNotFoundException extends RuntimeException{
     public SampleNotFoundException() {

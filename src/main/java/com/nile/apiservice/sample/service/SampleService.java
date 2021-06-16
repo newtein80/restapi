@@ -3,7 +3,7 @@ package com.nile.apiservice.sample.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.nile.apiservice.sample.exception.SampleNotFoundException;
+import com.nile.apiservice.sample.exception.exceptions.SampleNotFoundException;
 import com.nile.apiservice.sample.model.dto.SampleDTO;
 import com.nile.apiservice.sample.model.entity.Sample;
 import com.nile.apiservice.sample.repository.SampleRepository;
