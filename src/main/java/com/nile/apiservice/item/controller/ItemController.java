@@ -13,9 +13,9 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -23,6 +23,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RestController
 @RequestMapping("/v1/nileapi/item")
+@Api(value = "item V1") // 해당 클래스가 Swagger 리소스라는 것을 명시
 @RequiredArgsConstructor
 public class ItemController {
     private final ItemService itemService;
