@@ -13,10 +13,14 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * https://cla9.tistory.com/category/JAVA/JPA
+ */
 @RestController
 @RequestMapping("/v1/nileapi/item")
 @RequiredArgsConstructor
