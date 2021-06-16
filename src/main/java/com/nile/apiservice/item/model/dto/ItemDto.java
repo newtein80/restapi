@@ -21,21 +21,24 @@ import lombok.NoArgsConstructor;
 @ApiModel(value = "아이템 상세 정보 DTO", description = "Item's Data Transfer Object")
 public class ItemDto {
 
-    @ApiModelProperty(position = 1, notes = "item dto's title")
+    @ApiModelProperty(position = 1, notes = "item dto's key")
+    private Long itemId;
+    @ApiModelProperty(position = 2, notes = "item dto's title")
     private String title;
-    @ApiModelProperty(position = 2, notes = "item dto's content")
+    @ApiModelProperty(position = 3, notes = "item dto's content")
     private String content;
-    @ApiModelProperty(position = 3, notes = "item dto's views")
+    @ApiModelProperty(position = 4, notes = "item dto's views")
     private Long views;
-    @ApiModelProperty(position = 4, notes = "item dto's createDt")
+    @ApiModelProperty(position = 5, notes = "item dto's createDt")
     private Date createDt;
-    @ApiModelProperty(position = 5, notes = "item dto's itemType")
+    @ApiModelProperty(position = 6, notes = "item dto's itemType")
     private ItemType itemType;
-    @ApiModelProperty(position = 6, notes = "item dto's topItem")
+    @ApiModelProperty(position = 7, notes = "item dto's topItem")
     private Boolean topItem;
 
     public static ItemDto of(Item item) {
         return ItemDto.builder()
+        .itemId(item.getItemId())
         .title(item.getTitle())
         .content(item.getContent())
         .views(item.getViews())
