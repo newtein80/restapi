@@ -20,23 +20,23 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
     }
 
     @Override
-    public Page<T> findAll(Pageable pageable, Integer totalElements) {
-        return findAll(null, pageable, totalElements, Sort.unsorted());
+    public Page<T> findAll(Pageable pageable, Integer totalItems) {
+        return findAll(null, pageable, totalItems, Sort.unsorted());
     }
 
     @Override
-    public Page<T> findAll(Specification<T> spec, Pageable pageable, Integer totalElements) {
-        return findAll(spec, pageable, totalElements, Sort.unsorted());
+    public Page<T> findAll(Specification<T> spec, Pageable pageable, Integer totalItems) {
+        return findAll(spec, pageable, totalItems, Sort.unsorted());
     }
 
     @Override
-    public Page<T> findAll(Specification<T> spec, Pageable pageable, Integer totalElements, Sort sort) {
+    public Page<T> findAll(Specification<T> spec, Pageable pageable, Integer totalItems, Sort sort) {
         TypedQuery<T> query = getQuery(spec, sort);
 
         int pageNumber = pageable.getPageNumber();
         int pageSize = pageable.getPageSize();
 
-        if(totalElements == null){
+        if(totalItems == null){
             return findAll(spec, pageable);
         }
 
@@ -48,14 +48,14 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
             throw new IllegalArgumentException("pageSize must not be less than one");
         }
 
-        if(totalElements < pageNumber * pageSize){
-            throw new IllegalArgumentException("totalElements must not be less than pageNumber * pageSize");
+        if(totalItems < pageNumber * pageSize){
+            throw new IllegalArgumentException("totalItems must not be less than pageNumber * pageSize");
         }
 
         int offset = (int) pageable.getOffset();
         query.setFirstResult(offset);
         query.setMaxResults(pageable.getPageSize());
 
-        return new PageImpl<>(query.getResultList(), PageRequest.of(pageNumber, pageSize), totalElements);
+        return new PageImpl<>(query.getResultList(), PageRequest.of(pageNumber, pageSize), totalItems);
     }
 }

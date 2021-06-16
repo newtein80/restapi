@@ -11,7 +11,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
 public interface BaseRepository<T, ID extends Serializable> extends JpaRepository<T, ID> {
-    Page<T> findAll(Pageable pageable, Integer totalElements);
-    Page<T> findAll(Specification<T> spec, Pageable pageable, Integer totalElements);
-    Page<T> findAll(Specification<T> spec, Pageable pageable, Integer totalElements, Sort sort);
+    Page<T> findAll(Pageable pageable, Integer totalItems);
+    Page<T> findAll(Specification<T> spec, Pageable pageable, Integer totalItems);
+    Page<T> findAll(Specification<T> spec, Pageable pageable, Integer totalItems, Sort sort);
 }

@@ -1,19 +1,18 @@
 package com.nile.apiservice.item.controller;
 
 import com.nile.apiservice.common.hateoas.LinkHrefUtil;
+import com.nile.apiservice.common.page.CustomPagedResourceAssembler;
+import com.nile.apiservice.common.page.PageableDTO;
 import com.nile.apiservice.item.model.dto.ItemDto;
 import com.nile.apiservice.item.service.ItemService;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
@@ -23,18 +22,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ItemController {
     private final ItemService itemService;
-    private final PagedResourcesAssembler<ItemDto> pagedResourcesAssembler;
+    private final CustomPagedResourceAssembler<ItemDto> customPagedResourceAssembler;
 
     @GetMapping("/items")
     public ResponseEntity<PagedModel<EntityModel<ItemDto>>> getItems(
-        Pageable pageable,
-        @RequestParam(required = false, name = "total_items") Integer totalItems
+        PageableDTO pageableDTO
     ) {
-        Page<ItemDto> items = this.itemService.getItems(pageable, totalItems);
+        Page<ItemDto> items = this.itemService.getItems(pageableDTO);
         PagedModel<EntityModel<ItemDto>> pagedModel = LinkHrefUtil.getEntityModels(
-            pagedResourcesAssembler,
+            customPagedResourceAssembler,
             items,
-            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getItems(null, null)),
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getItems(null)),
             // ItemDto::getItemId
             v -> v.getItemId()
         );
