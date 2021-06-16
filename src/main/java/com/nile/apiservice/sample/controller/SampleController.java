@@ -1,5 +1,7 @@
 package com.nile.apiservice.sample.controller;
 
+import java.util.List;
+
 import com.nile.apiservice.sample.model.dto.SampleDTO;
 import com.nile.apiservice.sample.service.SampleService;
 
@@ -30,45 +32,36 @@ public class SampleController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public String getSamples() {
-        this.sampleService.getSamples();
-        return "Sample List !";
+    public List<SampleDTO> getSamples() {
+        return this.sampleService.getSamples();
     }
 
     @GetMapping("/{sampleId}")
     @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
-    public String getSample(@PathVariable long sampleId) {
-        this.sampleService.getSample(sampleId);
-        return "Sample Info !";
+    public SampleDTO getSample(@PathVariable long sampleId) {
+        return this.sampleService.getSample(sampleId);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
-    public String addSample(
+    public SampleDTO addSample(
         @RequestBody SampleDTO sampleDTO
     ) {
-        this.sampleService.addSample(sampleDTO.getSampleTitle(), sampleDTO.getSampleContent());
-        return "Sample Add !";
+        return this.sampleService.addSample(sampleDTO.getSampleTitle(), sampleDTO.getSampleContent());
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
-    public String updateSample(
+    public SampleDTO updateSample(
         @PathVariable long sampleId,
         @RequestBody SampleDTO sampleDTO
     ) {
-        this.sampleService.updateSample(sampleId, sampleDTO.getSampleTitle(), sampleDTO.getSampleContent());
-        return "Sample Update !";
+        return this.sampleService.updateSample(sampleId, sampleDTO.getSampleTitle(), sampleDTO.getSampleContent());
     }
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
-    public String deleteSample(@PathVariable long sampleId) {
+    public void deleteSample(@PathVariable long sampleId) {
         this.sampleService.deleteSample(sampleId);
-        return "Sample Delete !";
     }
 }
