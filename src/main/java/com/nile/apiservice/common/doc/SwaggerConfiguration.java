@@ -24,10 +24,12 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.service.ResponseMessage;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
+// import springfox.documentation.swagger2.annotations.EnableSwagger2;
+// import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
-@EnableSwagger2WebMvc
+@EnableSwagger2
 @Import(BeanValidatorPluginsConfiguration.class)
 public class SwaggerConfiguration extends WebMvcConfigurationSupport {
     private String docVersion = "V1";
@@ -48,8 +50,9 @@ public class SwaggerConfiguration extends WebMvcConfigurationSupport {
         .groupName(docVersion) // Docket Bean이 한 개일 경우 기본 값은 default이므로, 생략가능, 여러 Docket Bean을 생성했을 경우 groupName이 충돌하지 않아야 하므로, 여기서는 각 Docket Bean의 버전을 명시
         .select() // ApiSelectorBuilder를 생성
         .apis(RequestHandlerSelectors.basePackage("com.nile.apiservice")) // api 스펙이 작성되어 있는 패키지를 지정. 즉, 컨트롤러가 존재하는 패키지를 basepackage로 지정하여, RequestMapping( GetMapping, PostMapping ... )이 선언된 API를 문서화
-        .paths(PathSelectors.ant("/v1/api/**")) // apis()로 선택되어진 API중 특정 path 조건에 맞는 API들을 다시 필터링하여 문서화
+        .paths(PathSelectors.ant("/v1/nileapi/**")) // apis()로 선택되어진 API중 특정 path 조건에 맞는 API들을 다시 필터링하여 문서화
         .build()
+        .pathMapping("/")
         .apiInfo(apiInfo(docTitle, docVersion)) // 제목, 설명 등 문서에 대한 정보들을 보여주기 위해 호출
         .globalResponseMessage(RequestMethod.GET, responseMessages)
         ;

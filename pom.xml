@@ -27,7 +27,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-rest</artifactId><!--  -->
+			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -81,16 +81,20 @@
             <version>2.3.1</version>
         </dependency>
 
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
 		<dependency>
 			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId><!--  -->
-			<version>2.10.5</version>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>3.0.0</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
 		<dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId><!--  -->
-            <version>2.10.5</version>
-        </dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.plugin</groupId>
 			<artifactId>spring-plugin-core</artifactId><!--  -->
@@ -98,11 +102,13 @@
 		</dependency>
 
 
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-bean-validators -->
 		<dependency>
 			<groupId>io.springfox</groupId>
-			<artifactId>springfox-bean-validators</artifactId><!--  -->
-			<version>2.9.2</version>
+			<artifactId>springfox-bean-validators</artifactId>
+			<version>3.0.0</version>
 		</dependency>
+
 		
 		<!-- https://mvnrepository.com/artifact/com.querydsl/querydsl-core -->
 		<dependency>
