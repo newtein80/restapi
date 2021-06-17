@@ -1,6 +1,7 @@
 package com.nile.apiservice.common.doc;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
@@ -11,6 +12,8 @@ import org.springframework.hateoas.client.LinkDiscoverers;
 import org.springframework.hateoas.mediatype.collectionjson.CollectionJsonLinkDiscoverer;
 import org.springframework.plugin.core.SimplePluginRegistry;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.PathSelectors;
@@ -21,12 +24,12 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.service.ResponseMessage;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 @Configuration
-@EnableSwagger2 // Swagger2 버전을 활성화 하겠다는 어노테이션
+@EnableSwagger2WebMvc
 @Import(BeanValidatorPluginsConfiguration.class)
-public class SwaggerConfiguration {
+public class SwaggerConfiguration extends WebMvcConfigurationSupport {
     private String docVersion = "V1";
     private String docTitle = "UVM REST API Document " + docVersion;
 
@@ -69,16 +72,14 @@ public class SwaggerConfiguration {
             new Contact("Manager", "www.nilesoft.co.kr", "apimanager@nilesoft.co.kr"),
             "license",
             "www.nilesoft-license.co.kr",
-            new ArrayList<>()
+            Collections.emptyList()// new ArrayList<>()
         );
     }
 
-    // @Override
-    // protected void addResourceHandler(ResourceHandlerRegistry registry) {
-    //     registry.addResourceHandler("swagger-ui.html")
-    //     .addResourceLocations("classpath:/META-INF/resources/");
-    //     registry.addResourceHandler("/webjars/**")
-    //         .addResourceLocations("classpath:/META-INF/resources/webjars/");
-    // }
+    @Override
+    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
 
 }
